@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare Cost Analysis</title>
+<meta name="description" content="US healthcare case study: how patient demographics and admission types relate to conditions, billing and hospital resource use.">
+<style>
+  :root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --text: #1c2733;
+    --muted: #5b6b7b;
+    --accent: #0b6e8a;
+    --accent-soft: #e2f1f5;
+    --border: #dde4ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10161d;
+      --card: #18212b;
+      --text: #e8eef4;
+      --muted: #9aabbb;
+      --accent: #5cc3dd;
+      --accent-soft: #1a3340;
+      --border: #2a3744;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 56px; }
+  header { padding: 48px 0 24px; }
+  h1 { font-size: 2.1rem; margin: 0 0 12px; line-height: 1.2; }
+  h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); font-size: 1.05rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 20px;
+  }
+  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .dl {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    background: var(--accent-soft);
+  }
+  .dl:hover { border-color: var(--accent); }
+  .dl strong { display: block; color: var(--accent); margin-bottom: 4px; }
+  .dl span { font-size: 0.92rem; color: var(--muted); }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin-bottom: 8px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 4px; }
+  .stat { border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat b { display: block; font-size: 1.5rem; color: var(--accent); }
+  .stat span { font-size: 0.85rem; color: var(--muted); }
+  a { color: var(--accent); }
+  footer { margin-top: 32px; color: var(--muted); font-size: 0.92rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Healthcare Cost Analysis</h1>
+    <p class="lead">A US healthcare case study on how patient demographics (age, gender) and admission types relate to medical conditions, billing and hospital resource use. Built in Excel and presented as a PowerPoint deck. The findings feed two sets of recommendations: one for patients choosing an insurance provider, one for hospital planning.</p>
+  </header>
+
+  <section class="card">
+    <h2>Project Files</h2>
+    <div class="downloads">
+      <a class="dl" href="Healthcare%20analysis.xlsx" download>
+        <strong>Healthcare analysis.xlsx</strong>
+        <span>Raw data, cleaned data, data dictionary, cleaning log, pivot tables and insight sheets</span>
+      </a>
+      <a class="dl" href="healthcare%20analysis%20PPT.pptx" download>
+        <strong>healthcare analysis PPT.pptx</strong>
+        <span>Presentation summarising the findings and recommendations</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Data</h2>
+    <div class="stats">
+      <div class="stat"><b>10,000</b><span>patient admissions (Oct 2018 to Oct 2023)</span></div>
+      <div class="stat"><b>9,976</b><span>with a usable billing amount</span></div>
+      <div class="stat"><b>6</b><span>medical conditions</span></div>
+      <div class="stat"><b>5</b><span>insurers</span></div>
+    </div>
+    <h3>Key fields</h3>
+    <p>Age, gender, blood type, medical condition, admission and discharge dates, insurance provider, billing amount (USD), admission type, test result.</p>
+    <h3>Conditions</h3>
+    <p>Arthritis, Asthma, Cancer, Diabetes, Hypertension, Obesity.</p>
+    <h3>Insurers</h3>
+    <p>Aetna, Blue Cross, Cigna, Medicare, UnitedHealthcare.</p>
+    <h3>Sample check</h3>
+    <p>Every gender, age group, condition and insurer segment has an adequate sample size (95% margin of error of about 1-3%).</p>
+  </section>
+
+  <section class="card">
+    <h2>Approach</h2>
+    <ul>
+      <li>Kept an untouched copy of the raw CSV and documented every column in a data dictionary.</li>
+      <li>Cleaned data-quality issues (letter/digit mix-ups, inconsistent text, mixed date formats, blank billing amounts) and logged each fix.</li>
+      <li>Removed patient name, doctor and hospital fields for privacy.</li>
+      <li>Built pivot tables for condition, demographics, blood group, admission type and insurer.</li>
+      <li>Tested hypotheses and turned the results into recommendations.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Key Findings</h2>
+    <ul>
+      <li><strong>Medical condition is the biggest cost driver.</strong> Cancer averages about $39.7K per admission, 3.2x Obesity (about $12.5K). Diabetes ($30.1K) is second highest. Overall average is $23.4K.</li>
+      <li><strong>Age, gender and length of stay barely change billing.</strong> Average billing is about $23.2K to $23.7K across age groups.</li>
+      <li><strong>Admission type drives length of stay.</strong> Emergency and urgent stays average about 15.5 days against about 10 for elective. Unplanned admissions are 69% of admissions but 78% of bed-days.</li>
+      <li>Emergency admissions bill about 4% above average ($24.3K), while urgent admissions sit about 3% below ($22.7K).</li>
+      <li><strong>Insurers differ by about 6% overall.</strong> Cigna ($24.2K) and Aetna ($24.1K) are highest, Blue Cross ($22.8K) is lowest. Differences are larger by condition: Cancer ranges from $36.1K (Medicare) to $43.1K (Cigna), and Diabetes from $24.8K (UnitedHealthcare) to $32.2K (Blue Cross).</li>
+      <li><strong>Demographic patterns:</strong>
+        <ul style="margin-top:8px">
+          <li>Hypertension is the largest group (2,155 cases, 21.6%), and 61% of those patients are male.</li>
+          <li>Asthma is most common in the young group.</li>
+          <li>Cancer and Arthritis rise with age.</li>
+          <li>Diabetes and Obesity are more common in women (58% and 62%).</li>
+        </ul>
+      </li>
+      <li><strong>Blood type has no strong link to condition.</strong> Visits are spread evenly across blood groups.</li>
+      <li><strong>Seasonality is mild.</strong> Admissions peak in March (873) and are lowest in February (779). Hypertension peaks in October (214).</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Recommendations</h2>
+    <h3>For patients choosing an insurer</h3>
+    <ul>
+      <li>Compare insurers for your specific condition, not just overall price. The gap between insurers is far larger for Cancer and Diabetes than overall.</li>
+      <li>Blue Cross, Medicare and UnitedHealthcare average about 2-3% lower billing than the overall average.</li>
+    </ul>
+    <h3>For hospital planning</h3>
+    <ul>
+      <li>Plan bed capacity around emergency and urgent admissions, which take most bed-days.</li>
+      <li>Prepare for a high, steady volume of Hypertension cases all year.</li>
+      <li>Focus cost management on Cancer and Diabetes, where billing per admission is highest.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Tools Used</h2>
+    <p>Microsoft Excel (data cleaning, pivot tables, formulas, charts, Power Query Editor) and Microsoft PowerPoint.</p>
+  </section>
+
+  <footer>
+    <p>Author: Shakeel Nawaz Khan &middot; GitHub: <a href="https://github.com/shakil389-eng">shakil389-eng</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
